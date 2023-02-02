@@ -1,0 +1,62 @@
+#include <iostream>
+#include "linked_list.h"
+
+using namespace std;
+
+
+struct node * build_linked_list(int elements){
+    struct node * list_head = NULL;
+    if (elements == 0) return list_head;
+    struct node * prev = list_head;
+    for (int i =0 ; i< elements; i++){
+        struct node * newNode = new node;
+        newNode->number = i;
+        newNode->next = NULL;
+        if (list_head == NULL){
+            list_head = newNode;
+        }
+        else {
+            prev->next = newNode;
+        }
+        prev=newNode;
+    }
+    cout << list_head->next->number << endl;
+    return list_head;
+}
+
+void print_linked_list(struct node * list, int elements){
+    cout << "Executing print" << endl;
+    struct node * cur = list;
+    while(cur != NULL){
+        cout << cur->number << " ";
+        cur = cur->next;
+    }
+}
+
+
+
+
+int delete_linked_list(struct node * list, int elements){
+  int deleted = 0;
+  if (elements == 0) return deleted;
+  struct node * prev = list;
+  struct node * nxt = NULL;
+  while (prev != NULL){
+      nxt = prev->next;
+      delete prev;
+      prev = nxt; 
+      deleted++;
+  }
+  return deleted;
+}
+
+
+/*
+int main(){
+  int num_elements = 3;
+  struct node * l1 = build_linked_list(num_elements);
+  print_linked_list(l1, num_elements);
+  delete_linked_list(l1, num_elements);
+
+}
+*/

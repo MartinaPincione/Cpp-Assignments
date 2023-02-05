@@ -15,53 +15,27 @@ void output_int_array(int nums[], int length){
 
 int swap_val_to_end(int nums[], int length, int val){ //definition of the function
 
-  int i, backwards = length - 1;
-  int toDelete = 0;
+  int i = 0, backwards = length - 1;
+    while (i <= backwards) {
+        if (nums[i] == val) {
+	  int temp = nums[backwards];
+	  nums[backwards] = nums[i];                                                                                                  
+	  nums[i] = temp;                                                                                                             
+	  backwards--;
+        } else {
+            i++;
+        }
 
-  while( i <= backwards) {
-    if (nums[i] == val) {
-      
-      int temp = nums[backwards];
-      nums[backwards] = nums[i];
-      backwards--;
-      nums[i] = temp;
-      toDelete++;      
-    } else {
-      i++;
     }
-  
-  }
-
-  //cout << "Elements swapped and returning: " << toDelete << endl; 			  
+    int toDelete = length - (backwards + 1);
+    cout << "to delete: " << toDelete<< endl;
+    return toDelete;
+}
+/*
+  cout << "to delete: " << toDelete<< endl;
   return toDelete;
 }
-
-void delete_end_elements(int nums[], const int length, int end_elements){
-
-  for(int i = length - 1; end_elements > 0 ; end_elements--){
-    if (end_elements == nums[i]) {
-      cout << "_ ";
-      nums[i] = 0;
-    } else {
-      cout << nums[i] << " ";
-    }
-    i--;
-  }
-  
-  cout << endl;  
-
-}
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 /*
  

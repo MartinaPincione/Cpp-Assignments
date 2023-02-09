@@ -1,0 +1,22 @@
+#include <iostream>
+#include <stack>
+#include <fstream>
+#include "stack.h"
+
+using namespace std;
+
+
+stack<int> insert_to_stack(){
+
+  stack<int> s;
+  ifstream inputFile("nums.txt");
+
+  int temp;
+  while(inputFile >> temp){
+    s.push(temp);
+  }
+
+  inputFile.close();
+
+  return s;
+}

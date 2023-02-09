@@ -1,0 +1,8 @@
+#ifndef __STACK_1_H_
+#define __STACK_1_H_
+
+#include <stack>
+
+stack<int> insert_to_stack();
+
+#endif

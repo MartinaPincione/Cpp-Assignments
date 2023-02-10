@@ -42,7 +42,7 @@ int pop_from_queue(queue<int> q){
     return 0;
   }
   catch(int i){
-    cout << "Sum was negative: " << i << endl;
+    cout << "Sum was negative" << endl;
     return 1;
   }
 

@@ -5,10 +5,10 @@
 
 
 
-stack<int> insert_to_stack(){
+stack<int> insert_to_stack(string f){
 
   stack<int> s;
-  ifstream inputFile("nums.txt");
+  ifstream inputFile(f);
 
   int temp;
   while(inputFile >> temp){
@@ -27,4 +27,25 @@ int pop_from_stack(stack<int> s){
     s.pop();
   }
   return last_element;
+}
+
+
+int check_sum_stack(stack<int> s){
+
+  int sum= 0;
+  while(!s.empty()){
+    sum+= s.top();
+    s.pop();
+  }
+
+  try {
+    if(sum < 0) throw int(3);
+    return 0;
+  }
+  catch(int i){
+    cout << "Sum was negative: " << i << endl;
+    return 1;
+  }
+
+
 }

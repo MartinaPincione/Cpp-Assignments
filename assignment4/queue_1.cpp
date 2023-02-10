@@ -3,11 +3,11 @@
 #include <fstream>
 #include "queue_1.h"
 
-queue<int> insert_to_queue(){
+queue<int> insert_to_queue(string f){
 
     queue<int> q;
 
-    ifstream inputFile("nums.txt");
+    ifstream inputFile(f);
 
     int temp;
     while(inputFile >> temp){
@@ -27,4 +27,24 @@ int pop_from_queue(queue<int> q){
         q.pop();
     }
     return last_element;
+}
+
+ int check_sum_queue(queue<int> q){
+
+  int sum= 0;
+  while(!q.empty()){
+    sum+= q.front();
+    q.pop();
+  }
+
+  try {
+    if(sum < 0) throw int(3);
+    return 0;
+  }
+  catch(int i){
+    cout << "Sum was negative: " << i << endl;
+    return 1;
+  }
+
+
 }

@@ -10,3 +10,6 @@ run assignment 2: ./UnitTest
 
 compiling for assingment3: g++ linked_list.cpp doctest.h linked_list.h UnitTest.cpp -o UnitTest
 run assignment 3: ./UnitTest
+
+compiling for assignment4: g++ stack_1.cpp queue_1.cpp UnitTest.cpp -o UnitTest
+run assignment 4: ./UnitTest

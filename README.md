@@ -13,3 +13,8 @@ run assignment 3: ./UnitTest
 
 compiling for assignment4: g++ stack_1.cpp queue_1.cpp UnitTest.cpp -o UnitTest
 run assignment 4: ./UnitTest
+
+
+compiling for assignment5: g++ student.h student_func.cpp UnitTest.cpp -o UnitTest
+run assignment 5: ./UnitTest
+

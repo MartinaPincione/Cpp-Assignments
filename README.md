@@ -21,3 +21,6 @@ run assignment 5: ./UnitTest
 compiling for assignment6: g++ vector_sort.h vector_sort.cpp UnitTest.cpp -o UnitTest
 run assignment 6: ./UnitTest
 
+compiling for assignment7: g++ perfect.cpp perfect.h UnitTest.cpp -o UnitTest
+run assignment 7: ./UnitTest
+

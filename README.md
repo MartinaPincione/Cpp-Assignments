@@ -24,3 +24,6 @@ run assignment 6: ./UnitTest
 compiling for assignment7: g++ perfect.cpp perfect.h UnitTest.cpp -o UnitTest
 run assignment 7: ./UnitTest
 
+compiling for assignment8: g++ graphs.cpp graphs.h UnitTest.cpp -o UnitTest
+run assignment 8: ./UnitTest
+

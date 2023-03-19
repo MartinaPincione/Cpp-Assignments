@@ -13,6 +13,7 @@ using namespace std;
 
 const string graph1 = "graph1.txt";
 const string graph2 = "graph2.txt";
+const string graph3 = "graph3.txt";
 
 TEST_CASE("testing graph1.txt"){
 
@@ -24,9 +25,7 @@ TEST_CASE("testing graph1.txt"){
     cout << "expected: " << endl;
     printVector(e1);
 
-    bool result1 = verifyEqual(g1, e1);
-
-    CHECK( result1 );
+    CHECK( verifyEqual(g1, e1) );
 
 }
 
@@ -40,4 +39,18 @@ TEST_CASE("testing empty file"){
 
     CHECK(verifyEqual(g2, e2));
 
+}
+
+TEST_CASE("testing graph 3"){
+
+    vector<vector<int>> g3 = readFileVertices(graph3);
+
+    vector<vector<int>> e3 {{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}};
+
+    cout << "from input: " << endl;
+    printVector(g3);
+    cout << "expected: " << endl;
+    printVector(e3);
+
+    CHECK(verifyEqual(g3, e3));
 }

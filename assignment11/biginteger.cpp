@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector> 
 #include <fstream>
-#include "bigint.h"
+#include <assert.h>
+
+//#include "bigint.h"
+#include "biginteger.h"
 
 using namespace std;
 
@@ -61,27 +64,15 @@ vector<vector<pair<bigint, bigint>>> matrix_mult(vector<vector<pair<bigint, bigi
         int n = y.size();
         cout << n << endl;
 
-        vector<vector<pair<bigint, bigint>>> result;
-
-        for(int i = 0; i < rows ; i ++){
-            vector<pair<bigint, bigint>> r;
-            for(int j = 0; j < cols; j++){
-                bigint t(0);
-                r.push_back(make_pair(t, t));
-            }
-            result.push_back(r);
-        }
+        vector<vector<pair<bigint, bigint>>> result(rows, vector<std::pair<bigint, bigint>>(cols));
         for(int i = 0 ; i < rows; i++){
             for(int j = 0; j < cols; j++){
                 for(int k = 0 ; k < n ; k++){
-                    cout << result[i][j].first << endl;
-                    cout << x[i][k].first << endl; //see error here?
+                    //cout << "result{}{}.first = " << result[i][j].first << endl;
+                    //cout << x[i][k].first << endl; //see error here?
                     pair<bigint, bigint> temp = product(x[i][k], y[k][j]);
-                    cout << temp.first << endl;
-                    pair<bigint, bigint> previous = make_pair(result[i][j].first, result[i][j].second); // I even tried breaking it down
-                    pair<bigint, bigint> temp2 = sum(previous, temp); // WHY GIVING ZERO HERE
-                    cout << temp2.first << endl;
-                    result[i][j] = sum(result[i][j], temp);
+                    if (result[i][j].first == bigint(0) && result[i][j].second == bigint(0)) result[i][j] = temp;
+                    else result[i][j] = sum(result[i][j], temp);
                 }
             }
         }
@@ -92,6 +83,28 @@ vector<vector<pair<bigint, bigint>>> matrix_mult(vector<vector<pair<bigint, bigi
         return {};
 
     }
+}
+
+bool equal_matrix(vector<vector<pair<bigint, bigint>>> x, vector<vector<pair<bigint, bigint>>> y){
+    if (x.size() != y.size() && x[0].size() != y[0].size()) return false;
+    for(int i = 0; i < x.size(); i++){
+        for(int j = 0; j< x[0].size();j++){
+            if ((x[i][j].first != y[i][j].first) ||( x[i][j].second != y[i][j].second)) return false;
+        }
+    }
+    return true;
+}
+
+void print_matrix(vector<vector<pair<bigint, bigint>>> m){
+    cout << "________________________________________________________________" << endl;
+    for(int i = 0; i < m.size(); i++){
+        for(int j = 0; j<m[i].size();j++){
+            cout << "( " << m[i][j].first << " / " << m[i][j].second << " )";
+        }
+        cout << endl;
+    }
+    cout << "________________________________________________________________" << endl;
+
 }
 
 
@@ -111,10 +124,14 @@ int main() {
     two.second = e;
 
     pair<bigint, bigint> p = product(fraction, two);
-    std::cout << p.first <<  " " << p.second << endl;
+    assert(p.first == (fraction.first * two.first));
+    assert(p.second == (fraction.second * two.second));
+
+    //std::cout << p.first <<  " " << p.second << endl;
 
     pair<bigint, bigint> s = sum(fraction, two);
-    std::cout << s.first <<  " " << s.second << endl;
+    assert(s.first == ((fraction.first * two.second) + (fraction.second * two.first)));
+    //std::cout << s.first <<  " " << s.second << endl;
 
     vector<pair<bigint, bigint>> v;
     v.push_back(p);
@@ -123,12 +140,33 @@ int main() {
     //std::cout << v[0].first << endl;
 
     vector<vector<pair<bigint, bigint>>> v1 = make_matrix("matrix1.txt");
+    assert(v1.size() == 3);
+    assert(v1[0].size() == 3);
+    print_matrix(v1);
+
     //std::cout << v1[0][0].first << endl;
 
     vector<vector<pair<bigint, bigint>>> v2 = make_matrix("matrix2.txt");
+    assert(v2.size() == 3);
+    assert(v2[0].size() == 2);
+    print_matrix(v2);
+
    //std::cout << v2[0][0].second << endl;
 
 
     vector<vector<pair<bigint, bigint>>> v3 = matrix_mult(v1, v2);
+    assert(v3.size() == 3);
+    assert(v3[0].size() == 2);
+    vector<vector<pair<bigint, bigint>>> ev3 = make_matrix("expected_v3.txt");
+    assert(equal_matrix(v3, ev3));
+    print_matrix(v3);
+
     std::cout << v3[0][0].first << endl;
+
+    vector<vector<pair<bigint, bigint>>> v4 = make_matrix("badmatrix.txt");
+    assert(v4.size() == 1);
+    assert(v4[0].size() == 1);
+
+    vector<vector<pair<bigint, bigint>>> v5 = matrix_mult(v1, v4);
+    assert(v5.size() == 0);
 }

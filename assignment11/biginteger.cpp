@@ -57,11 +57,11 @@ vector<vector<pair<bigint, bigint>>> matrix_mult(vector<vector<pair<bigint, bigi
     try {
         if (x[0].size() != y.size()) throw int(7);
         int rows = x.size();
-        cout << "new num rows: " << rows << endl;
+        //cout << "new num rows: " << rows << endl;
         int cols = y[0].size();
-        cout << "new num cols: " << cols << endl;
+        //cout << "new num cols: " << cols << endl;
         int n = y.size();
-        cout << n << endl;
+        //cout << n << endl;
 
         vector<vector<pair<bigint, bigint>>> result(rows, vector<std::pair<bigint, bigint>>(cols));
         for(int i = 0 ; i < rows; i++){
@@ -147,32 +147,39 @@ int main() {
     assert(v4.size() == 1);
     assert(v4[0].size() == 1);
     cout << "testing for dimensions of make_matrix PASSED" << endl << endl;;
-    //assert((string)v1[0][0].first == (string)(12345678901234567890));
     assert(v1[0][0].second == bigint(1));
     assert(v2[0][0].first == bigint(1));
     assert(v2[0][0].second == bigint(2));
     assert(v2[1][1].first == bigint(7));
     assert(v2[1][1].second == bigint(8));
-    cout << "testing for appropriate placement of values in matrix of make_matrix PASSED" << endl;
+    cout << "testing for appropriate placement of values in matrix of make_matrix PASSED" << endl << endl;
 
 
 
-
+    //assert(v1[0][0].first == bigint(12345678901234567890));
     //print_matrix(v1);
     //std::cout << v1[0][0].first << endl;
     //print_matrix(v2);
     //std::cout << v2[0][0].second << endl;
+    //std::cout << v3[0][0].first << endl;
+
 
 
     vector<vector<pair<bigint, bigint>>> v3 = matrix_mult(v1, v2);
     assert(v3.size() == 3);
     assert(v3[0].size() == 2);
+    cout << "testing dimensions of result matrix of make_matrix PASSED" << endl << endl;
+
+
+
     vector<vector<pair<bigint, bigint>>> ev3 = make_matrix("expected_v3.txt");
     assert(equal_matrix(v3, ev3));
-    print_matrix(v3);
+    cout << "testing for matrix structure of matrix_mult PASSED" << endl << endl;
+    //print_matrix(v3);
 
-    //std::cout << v3[0][0].first << endl;
 
     vector<vector<pair<bigint, bigint>>> v5 = matrix_mult(v1, v4);
     assert(v5.size() == 0);
+    cout << "testing that try/catch handling for incompatible matrices of matrix_mult PASSED" << endl << endl;
+
 }

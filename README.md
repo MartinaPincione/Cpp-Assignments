@@ -30,5 +30,6 @@ run assignment 8: ./UnitTest
 compiling for assignment9: g++ unique.cpp UnitTest.cpp -o UnitTest
 run assignment 9: ./UnitTest
 
-compiling for assingment11: 
-run assignment 11:
+compiling for assingment11: g++ biginteger.h biginteger.cpp -o big
+run assignment 11: ./big
+NOTE: UNIT TEST DOES NOT WORK WITH BIGINT LIBRARY, USING ASSERT.H TO RUN UNITTESTS

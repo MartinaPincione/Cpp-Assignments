@@ -3,7 +3,6 @@
 #include <fstream>
 #include <assert.h>
 
-//#include "bigint.h"
 #include "biginteger.h"
 
 using namespace std;
@@ -32,7 +31,7 @@ vector<vector<pair<bigint, bigint>>> make_matrix(string filename){
 
     file >> rows >> cols;
 
-    cout << " reading rows : " << rows << " cols : " <<  cols << endl;
+    //cout << " reading rows : " << rows << " cols : " <<  cols << endl;
 
     for(int i = 0; i < rows ; i++){
         vector<pair<bigint, bigint>> r;
@@ -106,10 +105,9 @@ void print_matrix(vector<vector<pair<bigint, bigint>>> m){
     cout << "________________________________________________________________" << endl;
 
 }
-
-
 int main() {
 
+    cout << endl;
 
     pair<bigint, bigint> fraction, two;
 
@@ -124,34 +122,46 @@ int main() {
     two.second = e;
 
     pair<bigint, bigint> p = product(fraction, two);
-    assert(p.first == (fraction.first * two.first));
-    assert(p.second == (fraction.second * two.second));
+    assert(p.first == bigint(9888 * 2));
+    assert(p.second == bigint((111 * 1)));
+    cout << "testing for product function PASSED" << endl << endl;
 
-    //std::cout << p.first <<  " " << p.second << endl;
 
     pair<bigint, bigint> s = sum(fraction, two);
-    assert(s.first == ((fraction.first * two.second) + (fraction.second * two.first)));
-    //std::cout << s.first <<  " " << s.second << endl;
+    assert(s.first == bigint((9888 * 1) + (111 * 2)));
+    assert(s.second == bigint(111*1));
+    cout << "testing for sum function PASSED" << endl << endl;
 
     vector<pair<bigint, bigint>> v;
     v.push_back(p);
     v.push_back(s);
     
-    //std::cout << v[0].first << endl;
 
     vector<vector<pair<bigint, bigint>>> v1 = make_matrix("matrix1.txt");
+    vector<vector<pair<bigint, bigint>>> v2 = make_matrix("matrix2.txt");
+    vector<vector<pair<bigint, bigint>>> v4 = make_matrix("badmatrix.txt");
     assert(v1.size() == 3);
     assert(v1[0].size() == 3);
-    print_matrix(v1);
-
-    //std::cout << v1[0][0].first << endl;
-
-    vector<vector<pair<bigint, bigint>>> v2 = make_matrix("matrix2.txt");
     assert(v2.size() == 3);
     assert(v2[0].size() == 2);
-    print_matrix(v2);
+    assert(v4.size() == 1);
+    assert(v4[0].size() == 1);
+    cout << "testing for dimensions of make_matrix PASSED" << endl << endl;;
+    //assert((string)v1[0][0].first == (string)(12345678901234567890));
+    assert(v1[0][0].second == bigint(1));
+    assert(v2[0][0].first == bigint(1));
+    assert(v2[0][0].second == bigint(2));
+    assert(v2[1][1].first == bigint(7));
+    assert(v2[1][1].second == bigint(8));
+    cout << "testing for appropriate placement of values in matrix of make_matrix PASSED" << endl;
 
-   //std::cout << v2[0][0].second << endl;
+
+
+
+    //print_matrix(v1);
+    //std::cout << v1[0][0].first << endl;
+    //print_matrix(v2);
+    //std::cout << v2[0][0].second << endl;
 
 
     vector<vector<pair<bigint, bigint>>> v3 = matrix_mult(v1, v2);
@@ -161,11 +171,7 @@ int main() {
     assert(equal_matrix(v3, ev3));
     print_matrix(v3);
 
-    std::cout << v3[0][0].first << endl;
-
-    vector<vector<pair<bigint, bigint>>> v4 = make_matrix("badmatrix.txt");
-    assert(v4.size() == 1);
-    assert(v4[0].size() == 1);
+    //std::cout << v3[0][0].first << endl;
 
     vector<vector<pair<bigint, bigint>>> v5 = matrix_mult(v1, v4);
     assert(v5.size() == 0);

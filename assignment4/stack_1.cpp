@@ -44,6 +44,7 @@ int check_sum_stack(stack<int> s){
   }
   catch(int i){
     cout << "Sum was negative" << endl;
+    cout << "the thrown integer was : " << i << endl;
     return 1;
   }
 
